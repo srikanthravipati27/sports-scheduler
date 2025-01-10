@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="csrf-token" content="<%= csrfToken %>">
+</head>
+<body>
+    <% if (errors && errors.length > 0) { %>
+        <ul>
+          <% errors.forEach(function(msg) { %>
+            <li style="color: red;"><%= msg %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+      <script>
+        console.log("CSRF Token:", "<%= csrfToken %>");  // Log the CSRF token
+      </script>
+      
+      <form action="/signup" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="text" name="Name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <input type="password" name="password2" placeholder="Confirm Password" required />
+        <select name="role">
+          <option value="player">Player</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit">Sign Up</button>
+      </form>
+      
+</body>
+</html>
