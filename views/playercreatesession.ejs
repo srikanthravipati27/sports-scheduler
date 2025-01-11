@@ -6,7 +6,7 @@
     <title>Create Session</title>
 </head>
 <body>
-    <%- include('../partials/navbar') %>
+ 
 
     <h1>Create a New Session</h1>
     <form action="/player/create-session" method="POST">
@@ -16,7 +16,7 @@
                 <option value="<%= sport.id %>"><%= sport.name %></option>
             <% }) %>
         </select>
-
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <label for="location">Location:</label>
         <input type="text" name="location" required>
 
@@ -33,6 +33,6 @@
         <button type="submit">Create Session</button>
     </form>
 
-    <%- include('../partials/footer') %>
+   
 </body>
 </html>

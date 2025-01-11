@@ -1,0 +1,12 @@
+<h1>Manage Sessions</h1>
+<ul>
+  <% sessions.forEach(session => { %>
+    <li>
+      <%= session.sport.name %> - <%= session.location %> (<%= session.startTime %>)
+      <form action="/admin/delete-session/<%= session.id %>" method="POST" style="display:inline;">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>

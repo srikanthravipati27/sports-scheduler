@@ -1,79 +1,60 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Dashboard</title>
 </head>
 <body>
-    <h1>Player Dashboard</h1>
+  <h1>Player Dashboard</h1>
 
-    <!-- Section for All Available Sessions -->
-    <section>
-        <h2>All Available Sessions</h2>
-        <% allSessions.forEach(session => { %>
-            <% if (session.availableSpots > 0) { %>
-                <div>
-                    <h3><%= session.sport ? session.sport.name : 'Sport not found' %></h3>
-                    <p>Location: <%= session.location %></p>
-                    <p>Start Time: <%= session.startTime %></p>
-                    <p>End Time: <%= session.endTime %></p>
-                    <p>Available Spots: <%= session.availableSpots %></p>
-                    
-                    <!-- Join Session Form -->
-                    <form action="/player/join-session/<%= session.id %>" method="POST">
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button type="submit">Join</button>
-                    </form>
-                </div>
-            <% } %>
-        <% }) %>
-    </section>
+  <!-- Sessions Created by Others -->
+  <section>
+    <h2>Sessions Created by Others</h2>
+    <% otherSessions.forEach(session => { %>
+      <div>
+        <h3><%= session.sport.name %> - <%= session.location %></h3>
+        <p>Start Time: <%= session.startTime %></p>
+        <p>Available Spots: <%= session.availableSpots %></p>
+        <% if (session.availableSpots > 0) { %>
+          <form action="/player/join-session/<%= session.id %>" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit">Join Session</button>
+          </form>
+        <% } else { %>
+          <p>Session is full</p>
+        <% } %>
+      </div>
+    <% }) %>
+  </section>
 
-    <!-- Section for Joined Sessions -->
-    <section>
-        <h2>Your Joined Sessions</h2>
-        <% joinedSessions.forEach(joined => { %>
-            <div>
-                <h3><%= joined.session.sport ? joined.session.sport.name : 'Sport not found' %></h3>
-                <p>Location: <%= joined.session.location %></p>
-                <p>Start Time: <%= joined.session.startTime %></p>
-                <p>End Time: <%= joined.session.endTime %></p>
-                <p>Available Spots: <%= joined.session.availableSpots %></p>
-            </div>
-        <% }) %>
-    </section>
+  <!-- Your Created Sessions -->
+  <section>
+    <h2>Your Created Sessions</h2>
+    <% createdSessions.forEach(session => { %>
+      <div>
+        <h3><%= session.sport.name %> - <%= session.location %></h3>
+        <p>Available Spots: <%= session.availableSpots %></p>
+        <form action="/player/delete-session/<%= session.id %>" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Delete Session</button>
+        </form>
+      </div>
+    <% }) %>
+  </section>
 
-    <!-- Section for Created Sessions -->
-    <section>
-        <h2>Your Created Sessions</h2>
-        <% createdSessions.forEach(session => { %>
-            <div>
-                <h3><%= session.sport ? session.sport.name : 'Sport not found' %></h3>
-                <p>Location: <%= session.location %></p>
-                <p>Start Time: <%= session.startTime %></p>
-                <p>End Time: <%= session.endTime %></p>
-                <p>Available Spots: <%= session.availableSpots %></p>
-                
-                <h4>Players Joined:</h4>
-                <ul>
-                    <% session.players.forEach(player => { %>
-                        <li><%= player.name %></li>
-                    <% }) %>
-                </ul>
-                
-                <!-- Delete Session Button -->
-                <form action="/player/delete-session/<%= session.id %>" method="POST">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit">Delete Session</button>
-                </form>
-            </div>
-        <% }) %>
-    </section>
-
-    <!-- Link to create a new session -->
-    <section>
-        <a href="/player/create-session">Create New Session</a>
-    </section>
-
+  <!-- Your Joined Sessions -->
+  <section>
+    <h2>Your Joined Sessions</h2>
+    <% joinedSessions.forEach(joined => { %>
+      <div>
+        <h3><%= joined.session.sport.name %> - <%= joined.session.location %></h3>
+        <form action="/player/cancel-session/<%= joined.session.id %>" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <textarea name="reason" placeholder="Reason for canceling" required></textarea>
+          <button type="submit">Cancel Session</button>
+        </form>
+      </div>
+    <% }) %>
+  </section>
 </body>
 </html>

@@ -1,27 +1,26 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Admin Dashboard</h1>
 <h3>Sports</h3>
 <ul>
   <% sports.forEach(sport => { %>
-    <li><%= sport.name %></li>
+    <li>
+      <%= sport.name %>
+      <a href="/admin/edit-sport/<%= sport.id %>">Edit</a>
+      <form action="/admin/delete-sport/<%= sport.id %>" method="POST" style="display:inline;">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
   <% }) %>
 </ul>
 
 <h3>Sessions</h3>
 <ul>
   <% sessions.forEach(session => { %>
-    <li><%= session.location %> - <%= session.startTime %></li>
+    <li>
+      <%= session.location %> - <%= session.startTime %>
+      <form action="/admin/delete-session/<%= session.id %>" method="POST" style="display:inline;">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
   <% }) %>
 </ul>
-
-<a href="/admin/manage-sports">Manage Sports</a>
-<a href="/admin/reports">View Reports</a>
-
-</body>
-</html>

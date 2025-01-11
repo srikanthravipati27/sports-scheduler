@@ -1,0 +1,7 @@
+<h1>Edit Sport</h1>
+<form action="/admin/edit-sport/<%= sport.id %>" method="POST">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label for="name">Sport Name:</label>
+  <input type="text" name="name" value="<%= sport.name %>" required>
+  <button type="submit">Update Sport</button>
+</form>
