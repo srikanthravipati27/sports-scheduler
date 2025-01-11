@@ -8,7 +8,6 @@ module.exports = (sequelize) => {
       PlayerSession.belongsTo(models.Session, { foreignKey: 'sessionId', as: 'session' });
     }
   }
-
   PlayerSession.init(
     {
       playerId: {
@@ -27,6 +26,22 @@ module.exports = (sequelize) => {
           key: 'id',
         },
       },
+      userId: {  // Add this field
+        type: DataTypes.INTEGER,
+        allowNull: true,  // Set to false if required
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+      },
+      SportId: {  // Add this field
+        type: DataTypes.INTEGER,
+        allowNull: true,  // Set to false if required
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+      },
     },
     {
       sequelize,
@@ -34,6 +49,7 @@ module.exports = (sequelize) => {
       tableName: 'PlayerSessions',
     }
   );
+  
 
   return PlayerSession;
 };

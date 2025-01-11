@@ -4,13 +4,18 @@ const csrf = require('csurf');
 const bodyParser = require('body-parser');
 const { User } = require('./models');
 const { ensureAuthenticated, ensureAdmin } = require('./roleauth');
+const playerRoutes = require('./playerRoutes'); // Adjust path as needed
+const adminRoutes = require('./adminRoutes'); // Adjust path as needed
+
+
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
+
 const saltRounds = 10;
 const flash = require('connect-flash');
 const passport = require("passport");
-const connectEnsureLogin = require("connect-ensure-login");
+
 const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 app.use(cookieParser());
@@ -28,11 +33,13 @@ app.use(session({
   cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize());  
+app.use(passport.session());   
 
 app.use(csrf({ cookie: true }));
 app.use(flash());
+app.use('/player', playerRoutes);
+app.use('/admin', adminRoutes);
 
 // Passport configuration
 passport.use(new LocalStrategy({
@@ -69,6 +76,7 @@ passport.deserializeUser(async (id, done) => {
     done(error, false);
   }
 });
+
 
 
 app.use((req, res, next) => {
@@ -125,21 +133,36 @@ app.get('/signup', (req, res) => {
     res.render('login', { csrfToken: req.csrfToken(), errors });
   });
   
-  app.post(
-    '/login',
-    passport.authenticate('local', {
-      successRedirect: '/dashboard',
-      failureRedirect: '/login',
-      failureFlash: true,
-    })
-  );
-//   app.use((err, req, res, next) => {
-//     if (err.code === 'EBADCSRFTOKEN') {
-//       res.status(403).send('Form tampered with or invalid CSRF token.');
-//     } else {
-//       next(err);
-//     }
-//   });
+  app.post('/login', passport.authenticate('local', {
+    failureRedirect: '/login',
+    failureFlash: true,
+  }), (req, res) => {
+     // Check if user is correctly set
+    if (req.user.role === 'admin') {
+      res.redirect('/admin/dashboard');
+    } else if (req.user.role === 'player') {
+      res.redirect('/player/dashboard');
+    } else {
+      res.status(403).send('Unauthorized');
+    }
+  });
+  
+  
+  app.use((err, req, res, next) => {
+    if (err.code === 'EBADCSRFTOKEN') {
+      res.status(403).send('Form tampered with or invalid CSRF token.');
+    } else {
+      next(err);
+    }
+  });
+  app.get('/test', (req, res) => {
+    if (req.isAuthenticated()) {
+      res.send('Authenticated');
+    } else {
+      res.send('Not authenticated');
+    }
+  });
+  
 
   
   

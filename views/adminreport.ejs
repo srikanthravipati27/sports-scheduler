@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Session Reports</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Sport</th>
+      <th>Sessions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% report.forEach(session => { %>
+      <tr>
+        <td><%= session.sport.name %></td>
+        <td><%= session.location %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+</body>
+</html>

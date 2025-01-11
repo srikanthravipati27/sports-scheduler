@@ -44,6 +44,16 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      availableSpots: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      maxPlayers: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 10, // Default max players
+      },
     },
     {
       sequelize,
