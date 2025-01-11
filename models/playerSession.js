@@ -1,24 +1,28 @@
+// PlayerSession model
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   class PlayerSession extends Model {
     static associate(models) {
-      PlayerSession.belongsTo(models.User, { foreignKey: 'playerId', as: 'player' });
+      // Correct the associations
+      PlayerSession.belongsTo(models.User, { foreignKey: 'userId', as: 'player' });
       PlayerSession.belongsTo(models.Session, { foreignKey: 'sessionId', as: 'session' });
     }
   }
+
   PlayerSession.init(
     {
-      playerId: {
+      userId: {  // Foreign key for the User model (player)
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false,  // Set to false if required
         references: {
           model: 'Users',
           key: 'id',
         },
+        field: 'userId',
       },
-      sessionId: {
+      sessionId: {  // Foreign key for the Session model
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -26,19 +30,11 @@ module.exports = (sequelize) => {
           key: 'id',
         },
       },
-      userId: {  // Add this field
+      SportId: {  // Add this field for Sport association if needed
         type: DataTypes.INTEGER,
-        allowNull: true,  // Set to false if required
+        allowNull: true,
         references: {
-          model: 'Users',
-          key: 'id',
-        },
-      },
-      SportId: {  // Add this field
-        type: DataTypes.INTEGER,
-        allowNull: true,  // Set to false if required
-        references: {
-          model: 'Users',
+          model: 'Sports',
           key: 'id',
         },
       },
@@ -49,7 +45,6 @@ module.exports = (sequelize) => {
       tableName: 'PlayerSessions',
     }
   );
-  
 
   return PlayerSession;
 };

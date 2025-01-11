@@ -2,48 +2,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Player Dashboard</title>
 </head>
 <body>
     <h1>Player Dashboard</h1>
-<h3>Created Sessions</h3>
-<ul>
-  <% createdSessions.forEach(session => { %>
-    <li><%= session.location %> - <%= session.startTime %></li>
-  <% }) %>
-</ul>
-<!-- playerdashboard.ejs -->
-<h1>Your Created Sessions</h1>
 
-<% createdSessions.forEach(session => { %>
-  <div>
-    <h3><%= session.sport ? session.sport.name : 'Sport not found' %></h3>
-    <p>Location: <%= session.location %></p>
-    <p>Start Time: <%= session.startTime %></p>
-    <p>End Time: <%= session.endTime %></p>
-    <p>Available Spots: <%= session.availableSpots %></p>
-    
-    <% if (session.availableSpots > 0) { %>
-      <form action="/player/join-session/<%= session.id %>" method="POST">
-        <button type="submit">Join</button>
-      </form>
-    <% } else { %>
-      <p>No spots available</p>
-    <% } %>
-  </div>
-<% }) %>
+    <!-- Section for All Available Sessions -->
+    <section>
+        <h2>All Available Sessions</h2>
+        <% allSessions.forEach(session => { %>
+            <% if (session.availableSpots > 0) { %>
+                <div>
+                    <h3><%= session.sport ? session.sport.name : 'Sport not found' %></h3>
+                    <p>Location: <%= session.location %></p>
+                    <p>Start Time: <%= session.startTime %></p>
+                    <p>End Time: <%= session.endTime %></p>
+                    <p>Available Spots: <%= session.availableSpots %></p>
+                    
+                    <!-- Join Session Form -->
+                    <form action="/player/join-session/<%= session.id %>" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="submit">Join</button>
+                    </form>
+                </div>
+            <% } %>
+        <% }) %>
+    </section>
 
- 
+    <!-- Section for Joined Sessions -->
+    <section>
+        <h2>Your Joined Sessions</h2>
+        <% joinedSessions.forEach(joined => { %>
+            <div>
+                <h3><%= joined.session.sport ? joined.session.sport.name : 'Sport not found' %></h3>
+                <p>Location: <%= joined.session.location %></p>
+                <p>Start Time: <%= joined.session.startTime %></p>
+                <p>End Time: <%= joined.session.endTime %></p>
+                <p>Available Spots: <%= joined.session.availableSpots %></p>
+            </div>
+        <% }) %>
+    </section>
 
+    <!-- Section for Created Sessions -->
+    <section>
+        <h2>Your Created Sessions</h2>
+        <% createdSessions.forEach(session => { %>
+            <div>
+                <h3><%= session.sport ? session.sport.name : 'Sport not found' %></h3>
+                <p>Location: <%= session.location %></p>
+                <p>Start Time: <%= session.startTime %></p>
+                <p>End Time: <%= session.endTime %></p>
+                <p>Available Spots: <%= session.availableSpots %></p>
+                
+                <h4>Players Joined:</h4>
+                <ul>
+                    <% session.players.forEach(player => { %>
+                        <li><%= player.name %></li>
+                    <% }) %>
+                </ul>
+                
+                <!-- Delete Session Button -->
+                <form action="/player/delete-session/<%= session.id %>" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit">Delete Session</button>
+                </form>
+            </div>
+        <% }) %>
+    </section>
 
-<h3>Joined Sessions</h3>
-<ul>
-  <% joinedSessions.forEach(joined => { %>
-    <li><%= joined.session.location %> - <%= joined.session.startTime %></li>
-  <% }) %>
-</ul>
-
-<a href="/player/create-session">Create Session</a>
+    <!-- Link to create a new session -->
+    <section>
+        <a href="/player/create-session">Create New Session</a>
+    </section>
 
 </body>
 </html>

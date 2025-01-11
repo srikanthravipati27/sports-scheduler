@@ -12,9 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       // Define associations here
 
       // A User can create multiple Sessions
-      this.hasMany(models.Session, { 
-        foreignKey: 'creatorId', 
-        as: 'sessions' 
+      this.belongsToMany(models.Session, {
+        through: models.PlayerSession,
+        foreignKey: 'userId',
+        as: 'sessions',
       });
 
       // Example: If Users can also belong to Sports
