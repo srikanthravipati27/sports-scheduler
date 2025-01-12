@@ -89,6 +89,10 @@ app.get('/signup', (req, res) => {
     const errors = req.flash('error'); 
     res.render('signup', { csrfToken: req.csrfToken(), errors });
   });
+  app.get('/', (req, res) => {
+   
+    res.render('index');
+  });
   
   
   app.post('/signup', async (req, res) => {
@@ -172,7 +176,7 @@ app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
 });
   
-  
+module.exports = app; 
   
   
   

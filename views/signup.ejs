@@ -1,34 +1,79 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up</title>
     <meta name="csrf-token" content="<%= csrfToken %>">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        form input, form select, form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #0ce237;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        a {
+            color: #17f317;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <% if (errors && errors.length > 0) { %>
-        <ul>
-          <% errors.forEach(function(msg) { %>
-            <li style="color: red;"><%= msg %></li>
-          <% }); %>
-        </ul>
-      <% } %>
-      <script>
-        console.log("CSRF Token:", "<%= csrfToken %>");  // Log the CSRF token
-      </script>
-      
-      <form action="/signup" method="POST">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <input type="text" name="Name" placeholder="Name" required />
-        <input type="email" name="email" placeholder="Email" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <input type="password" name="password2" placeholder="Confirm Password" required />
-        <select name="role">
-          <option value="player">Player</option>
-          <option value="admin">Admin</option>
-        </select>
-        <button type="submit">Sign Up</button>
-      </form>
-      
+    <div>
+        <% if (errors && errors.length > 0) { %>
+            <ul class="error">
+                <% errors.forEach(function(msg) { %>
+                    <li><%= msg %></li>
+                <% }); %>
+            </ul>
+        <% } %>
+        <form action="/signup" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="text" name="Name" placeholder="Name" required />
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="password" name="password2" placeholder="Confirm Password" required />
+            <select name="role" required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="player">Player</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="/login">Log in here</a></p>
+    </div>
 </body>
 </html>

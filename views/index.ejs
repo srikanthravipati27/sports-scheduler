@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Scheduler</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures the body takes full height of the screen */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Helvetica', sans-serif;
+            color: #333;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            background-color: #fff;
+            color: #4CAF50;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-left: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .feature-item h4 {
+            font-size: 1.5rem;
+            color: #4CAF50;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            margin-top: auto; /* Pushes the footer to the bottom */
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Mobile-First Media Queries */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav a {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .feature-item h4 {
+                font-size: 1.2rem;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Sports Scheduler</h1> <!-- Website name -->
+        </div>
+        <nav>
+            <a href="/login" class="btn">Login</a>
+            <a href="/signup" class="btn">Sign Up</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to Sports Scheduler</h2>
+        <p>Organize, join, and manage sports sessions easily with our platform. Whether you're an administrator or a player, we've got you covered!</p>
+    </section>
+
+    <section class="features">
+        <h3>Why Choose Sports Scheduler?</h3>
+        <div class="feature-item">
+            <h4>For Administrators</h4>
+            <p>Manage sports sessions, track activity, and generate detailed reports.</p>
+        </div>
+        <div class="feature-item">
+            <h4>For Players</h4>
+            <p>Create, join, and manage sports sessions. Stay updated on your sessions.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sports Scheduler. All rights reserved.</p>
+    </footer>
+</body>
+</html>
