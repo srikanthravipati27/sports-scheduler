@@ -4,35 +4,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Player Dashboard</title>
   <style>
-   
+    /* General Body Styling */
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f0f4f8;
+      background-image: url('https://images.pexels.com/photos/30132698/pexels-photo-30132698/free-photo-of-crowded-stadium-with-enthusiastic-fans.jpeg?auto=compress&cs=tinysrgb&w=600'); /* Replace with your background image URL */
+      background-size: cover;
+      background-position: center;
       margin: 0;
       padding: 0;
-      color: #333;
+      color: #12b3e0;
       line-height: 1.6;
     }
-  
+
+    /* Navigation Bar Styling */
+    nav {
+      background-color: rgba(82, 231, 8, 0.6);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      padding: 15px 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #0af912;
+    }
+
+    /* Main Content Styling */
     h1 {
       text-align: center;
-      font-size: 2.8rem;
-      margin: 20px 0;
-      color: #2c3e50;
+      font-size: 3rem;
+      margin: 100px 0 20px;
+      color: #2f0cdd;
     }
-  
+
     section {
       max-width: 1100px;
-      margin: 20px auto;
+      margin: 120px auto;
       padding: 20px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.8);
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       gap: 30px;
     }
-  
+
     section h2 {
       font-size: 1.8rem;
       color: #34495e;
@@ -40,14 +78,13 @@
       border-bottom: 3px solid #3498db;
       padding-bottom: 10px;
     }
-  
-   
+
     .create-session-btn {
       display: inline-block;
       padding: 15px 30px;
       font-size: 1.2rem;
       font-weight: 600;
-      color: #ffffff;
+      color: #fff;
       background-color: #28a745;
       border: none;
       border-radius: 8px;
@@ -56,14 +93,13 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-  
+
     .create-session-btn:hover {
       background-color: #218838;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }
-  
-    
+
     .session-card {
       padding: 20px;
       border: 1px solid #e1e5eb;
@@ -74,25 +110,24 @@
       gap: 10px;
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
-  
+
     .session-card:hover {
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
       transform: translateY(-3px);
     }
-  
+
     .session-card h3 {
       font-size: 1.6rem;
       margin: 0;
       color: #2c3e50;
     }
-  
+
     .session-card p {
       font-size: 1rem;
       margin: 0;
       color: #555;
     }
-  
-   
+
     .action-btn {
       padding: 10px 20px;
       font-size: 1rem;
@@ -104,21 +139,20 @@
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.2s ease;
     }
-  
+
     .action-btn:hover {
       background-color: #2980b9;
       transform: scale(1.05);
     }
-  
+
     .action-btn.cancel {
       background-color: #e74c3c;
     }
-  
+
     .action-btn.cancel:hover {
       background-color: #c0392b;
     }
-  
-  
+
     textarea {
       width: 100%;
       padding: 15px;
@@ -128,51 +162,49 @@
       font-size: 1rem;
       font-family: 'Poppins', sans-serif;
     }
-  
+
     textarea:focus {
       outline: none;
       border-color: #3498db;
       box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
     }
-  
-    
+
     .session-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 20px;
     }
-  
-    
+
     footer {
       margin-top: 20px;
       text-align: center;
       font-size: 0.9rem;
       color: #888;
     }
-  
+
     footer a {
       color: #3498db;
       text-decoration: none;
     }
-  
+
     footer a:hover {
       text-decoration: underline;
     }
-  
-  
+
+    /* Responsive Design */
     @media (max-width: 768px) {
       h1 {
         font-size: 2.2rem;
       }
-  
+
       .create-session-btn {
         width: 100%;
       }
-  
+
       section {
         padding: 15px;
       }
-  
+
       .session-container {
         grid-template-columns: 1fr;
       }
@@ -180,9 +212,21 @@
   </style>
 </head>
 <body>
-  <h1>welcome to Dashboard</h1>
 
-  
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/player/dashboard">Dashboard</a></li>
+      <li><a href="/player/profile">Profile</a></li>
+      <li><a href="/player/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Heading -->
+  <h1>Welcome to Player Dashboard</h1>
+
+  <!-- Sessions Created by Others -->
   <section>
     <h2>Sessions Created by Others</h2>
     <div class="session-container">
@@ -204,7 +248,7 @@
     </div>
   </section>
 
- 
+  <!-- Your Created Sessions -->
   <section>
     <h2>Your Created Sessions</h2>
     <div class="session-container">
@@ -222,7 +266,7 @@
     <a href="/player/create-session" class="create-session-btn">Create New Session</a>
   </section>
 
- 
+  <!-- Your Joined Sessions -->
   <section>
     <h2>Your Joined Sessions</h2>
     <div class="session-container">
@@ -239,6 +283,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Player Dashboard | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
   </footer>
