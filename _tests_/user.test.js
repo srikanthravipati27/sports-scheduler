@@ -36,7 +36,7 @@ describe("Login Functionality", function () {
 
   test("Login page loads correctly", async () => {
     const res = await agent.get("/login");
-    expect(res.statusCode).toBe(200); // Expecting the login page to load successfully
+    expect(res.statusCode).toBe(200); 
     
   });
 });

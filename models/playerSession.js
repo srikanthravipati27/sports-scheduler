@@ -1,4 +1,4 @@
-// PlayerSession model
+
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
@@ -13,16 +13,16 @@ module.exports = (sequelize) => {
 
   PlayerSession.init(
     {
-      userId: {  // Foreign key for the User model (player)
+      userId: {  
         type: DataTypes.INTEGER,
-        allowNull: false,  // Set to false if required
+        allowNull: false,  
         references: {
           model: 'Users',
           key: 'id',
         },
         field: 'userId',
       },
-      sessionId: {  // Foreign key for the Session model
+      sessionId: { 
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
           key: 'id',
         },
       },
-      SportId: {  // Add this field for Sport association if needed
+      SportId: {  
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {

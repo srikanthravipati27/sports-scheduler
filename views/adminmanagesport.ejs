@@ -1,17 +1,102 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Manage Sports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #34495e;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+       
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #bdc3c7;
+            font-size: 1rem;
+            color: #34495e;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            button {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+        }
+    </style>
 </head>
 <body>
+
     <h1>Manage Sports</h1>
-<form action="/admin/manage-sports" method="POST">
-  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-  <label for="name">Sport Name:</label>
-  <input type="text" name="name" required>
-  <button type="submit">Add Sport</button>
-</form>
+
+    <div class="form-container">
+        <form action="/admin/manage-sports" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <label for="name">Sport Name:</label>
+            <input type="text" name="name" required placeholder="Enter sport name">
+            <button type="submit">Add Sport</button>
+        </form>
+    </div>
 
 </body>
 </html>

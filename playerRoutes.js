@@ -4,13 +4,12 @@ const { User, Session, Sport, PlayerSession } = require('./models');
 const router = express.Router();
 const { Op } = require('sequelize');
 
-// Player Dashboard
 router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   const createdSessions = await Session.findAll({
     where: { creatorId: req.user.id },
     include: [
       { model: Sport, as: 'sport' },
-      { model: User, as: 'players' }, // Ensure this association is included
+      { model: User, as: 'players' }, 
     ],
   });
 
@@ -28,7 +27,7 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   const otherSessions = await Session.findAll({
     where: {
       creatorId: { [Op.ne]: req.user.id },
-      startTime: { [Op.gt]: new Date() }, // Exclude past sessions
+      startTime: { [Op.gt]: new Date() }, 
     },
     include: { model: Sport, as: 'sport' },
   });
@@ -41,7 +40,7 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   });
 });
 
-// Create Session (GET)
+
 router.get('/create-session', ensureAuthenticated, async (req, res) => {
   try {
     const sports = await Sport.findAll();
@@ -52,7 +51,7 @@ router.get('/create-session', ensureAuthenticated, async (req, res) => {
   }
 });
 
-// Create Session (POST)
+
 router.post('/create-session', ensureAuthenticated, async (req, res) => {
   const { sportId, location, startTime, endTime, maxPlayers } = req.body;
 
@@ -74,7 +73,7 @@ router.post('/create-session', ensureAuthenticated, async (req, res) => {
   }
 });
 
-// Join Session
+
 router.post('/join-session/:sessionId', ensureAuthenticated, async (req, res) => {
   const sessionId = req.params.sessionId;
 
@@ -106,7 +105,7 @@ router.post('/join-session/:sessionId', ensureAuthenticated, async (req, res) =>
   }
 });
 
-// Cancel Session
+
 router.post('/cancel-session/:sessionId', ensureAuthenticated, async (req, res) => {
   const { sessionId } = req.params;
   const { reason } = req.body;
@@ -132,7 +131,7 @@ router.post('/cancel-session/:sessionId', ensureAuthenticated, async (req, res) 
   }
 });
 
-// Delete Session (Only for session creators)
+
 router.post('/delete-session/:sessionId', ensureAuthenticated, async (req, res) => {
   const sessionId = req.params.sessionId;
 

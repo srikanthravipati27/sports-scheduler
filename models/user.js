@@ -32,39 +32,39 @@ module.exports = (sequelize, DataTypes) => {
     {
       Name: {
         type: DataTypes.STRING,
-        allowNull: false, // Name is required
+        allowNull: false, 
         validate: {
           notEmpty: true,
         },
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false, // Email is required
-        unique: true, // Email should be unique
+        allowNull: false, 
+        unique: true, 
         validate: {
-          isEmail: true, // Validate proper email format
+          isEmail: true, 
         },
       },
       role: {
         type: DataTypes.STRING,
-        allowNull: false, // Role is required
+        allowNull: false, 
         validate: {
-          isIn: [['admin', 'player', 'coach']], // Restrict roles to predefined values
+          isIn: [['admin', 'player', 'coach']], 
         },
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false, // Password is required
+        allowNull: false, 
         validate: {
-          len: [6, 100], // Password must be at least 6 characters
+          len: [6, 100],
         },
       },
     },
     {
       sequelize,
       modelName: 'User',
-      tableName: 'Users', // Explicit table name
-      timestamps: true, // Enables createdAt and updatedAt
+      tableName: 'Users', 
+      timestamps: true, 
     }
   );
 

@@ -4,29 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Session Details</title>
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #34495e;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Session Details */
+        .session-details {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .session-details p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .session-details strong {
+            color: #2c3e50;
+        }
+
+       
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+      
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .session-details {
+                padding: 15px;
+                width: 90%;
+            }
+
+            button {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <%- include('../partials/navbar') %>
 
-    <h2>Session Details</h2>
-    <p><strong>Sport:</strong> <%= session.sport.name %></p>
-    <p><strong>Location:</strong> <%= session.location %></p>
-    <p><strong>Start Time:</strong> <%= session.startTime %></p>
-    <p><strong>End Time:</strong> <%= session.endTime %></p>
+    <div class="session-details">
+        <h2>Session Details</h2>
+        <p><strong>Sport:</strong> <%= session.sport.name %></p>
+        <p><strong>Location:</strong> <%= session.location %></p>
+        <p><strong>Start Time:</strong> <%= session.startTime %></p>
+        <p><strong>End Time:</strong> <%= session.endTime %></p>
 
-    <% if (user.role === 'player') { %>
-        <% if (session.players.includes(user.id)) { %>
-            <form action="/session/<%= session.id %>/cancel" method="POST">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <button type="submit">Cancel Session</button>
-            </form>
-        <% } else { %>
-            <form action="/session/<%= session.id %>/join" method="POST">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <button type="submit">Join Session</button>
-            </form>
+        <% if (user.role === 'player') { %>
+            <% if (session.players.includes(user.id)) { %>
+                <form action="/session/<%= session.id %>/cancel" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit">Cancel Session</button>
+                </form>
+            <% } else { %>
+                <form action="/session/<%= session.id %>/join" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit">Join Session</button>
+                </form>
+            <% } %>
         <% } %>
-    <% } %>
+    </div>
 
     <%- include('../partials/footer') %>
 </body>

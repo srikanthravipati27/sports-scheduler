@@ -4,8 +4,8 @@ const csrf = require('csurf');
 const bodyParser = require('body-parser');
 const { User } = require('./models');
 const { ensureAuthenticated, ensureAdmin } = require('./roleauth');
-const playerRoutes = require('./playerRoutes'); // Adjust path as needed
-const adminRoutes = require('./adminRoutes'); // Adjust path as needed
+const playerRoutes = require('./playerRoutes'); 
+const adminRoutes = require('./adminRoutes'); 
 
 
 const cookieParser = require('cookie-parser');
@@ -41,7 +41,6 @@ app.use(flash());
 app.use('/player', playerRoutes);
 app.use('/admin', adminRoutes);
 
-// Passport configuration
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -141,7 +140,7 @@ app.get('/signup', (req, res) => {
     failureRedirect: '/login',
     failureFlash: true,
   }), (req, res) => {
-     // Check if user is correctly set
+    
     if (req.user.role === 'admin') {
       res.redirect('/admin/dashboard');
     } else if (req.user.role === 'player') {

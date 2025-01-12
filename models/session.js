@@ -52,7 +52,7 @@ module.exports = (sequelize) => {
       maxPlayers: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 10, // Default max players
+        defaultValue: 10, 
       },
     },
     {
