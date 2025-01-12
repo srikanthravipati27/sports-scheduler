@@ -41,10 +41,8 @@ This project showcases my ability to build secure, user-friendly, and dynamic we
 ## **Live Application**
 Check out the live version of the application: [Sports Scheduler Live URL](https://sports-scheduler-phej.onrender.com)  
 
+### **Watch the YouTube Presentation**
+Check out the project presentation on YouTube:  
+[![Sports Scheduler Presentation](https://img.youtube.com/vi/EF9jUM0t1qc/0.jpg)](https://www.youtube.com/watch?v=EF9jUM0t1qc)
 
-## **Installation and Setup**
 
-### **Clone the Repository**
-```bash
-git clone https://github.com/srikanthravipati27/sports-scheduler.git
-cd sports-scheduler
