@@ -14,10 +14,8 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "sport",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "use_env_variable":"DB_URL",
+     "dialect": "postgres"
+
   }
 }
